@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Internal
+
+-   `SlotFill`: unify context providers and `Fill` implementations ([#68056](https://github.com/WordPress/gutenberg/pull/68056)).
+
 ## 30.3.0 (2025-09-03)
 
 ### Bug Fixes
