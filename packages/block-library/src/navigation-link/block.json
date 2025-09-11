@@ -43,6 +43,9 @@
 		},
 		"isTopLevelLink": {
 			"type": "boolean"
+		},
+		"metadata": {
+			"type": "object"
 		}
 	},
 	"usesContext": [
