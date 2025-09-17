@@ -230,15 +230,10 @@ const BlockInspectorSingleBlock = ( {
 				return;
 			}
 
-			const {
-				getClientIdsOfDescendants,
-				getBlockName,
-				getBlockEditingMode,
-			} = select( blockEditorStore );
+			const { getClientIdsOfDescendants, getBlockEditingMode } =
+				select( blockEditorStore );
 			return getClientIdsOfDescendants( clientId ).filter(
-				( current ) =>
-					getBlockName( current ) !== 'core/list-item' &&
-					getBlockEditingMode( current ) === 'contentOnly'
+				( current ) => getBlockEditingMode( current ) === 'contentOnly'
 			);
 		},
 		[ isSectionBlock, clientId ]
@@ -280,7 +275,8 @@ const BlockInspectorSingleBlock = ( {
 							) }
 							{ window?.__experimentalContentOnlyPatternInsertion && (
 								<ContentOnlyControls
-									clientIds={ contentClientIds }
+									rootClientId={ clientId }
+									contentClientIds={ contentClientIds }
 								/>
 							) }
 						</>
