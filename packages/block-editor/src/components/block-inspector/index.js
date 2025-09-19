@@ -276,7 +276,6 @@ const BlockInspectorSingleBlock = ( {
 							{ window?.__experimentalContentOnlyPatternInsertion && (
 								<ContentOnlyControls
 									rootClientId={ clientId }
-									contentClientIds={ contentClientIds }
 								/>
 							) }
 						</>
