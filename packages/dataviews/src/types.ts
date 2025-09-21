@@ -248,7 +248,7 @@ export type Field< Item > = {
 	 * Children field definitions for array fields with structured data.
 	 * When provided, array fields will render as tables with columns based on children.
 	 */
-	children?: Field< Item >[];
+	children?: Field< Record< string, unknown > >[];
 
 	/**
 	 * Callback used to render the field. Defaults to `field.getValue`.
@@ -335,7 +335,7 @@ export type NormalizedField< Item > = Omit<
 	enableSorting: boolean;
 	filterBy: NormalizedFilterByConfig | false;
 	readOnly: boolean;
-	children: NormalizedField< Item >[];
+	children: NormalizedField< Record< string, unknown > >[];
 };
 
 /**
