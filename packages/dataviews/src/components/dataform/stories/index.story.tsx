@@ -528,6 +528,7 @@ const ValidationComponent = ( {
 		password: string;
 		toggle?: boolean;
 		toggleGroup?: string;
+		arrayWithChildren: Record< string, unknown >[];
 	};
 
 	const [ post, setPost ] = useState< ValidatedItem >( {
@@ -545,6 +546,10 @@ const ValidationComponent = ( {
 		password: 'secretpassword123',
 		toggle: undefined,
 		toggleGroup: undefined,
+		arrayWithChildren: [
+			{ day: 'monday', openingHours: 4 },
+			{ day: 'tuesday', openingHours: 6 },
+		],
 	} );
 
 	const customTextRule = ( value: ValidatedItem ) => {
@@ -629,6 +634,21 @@ const ValidationComponent = ( {
 	const customToggleGroupRule = ( value: ValidatedItem ) => {
 		if ( value.toggleGroup !== 'option1' ) {
 			return 'Value must be Option 1.';
+		}
+
+		return null;
+	};
+
+	const customNestedTextRule = ( value: any ) => {
+		if ( ! /^[a-zA-Z ]+$/.test( value.day ) ) {
+			return 'Value must only contain letters and spaces.';
+		}
+
+		return null;
+	};
+	const customNestedIntegerRule = ( value: any ) => {
+		if ( value.openingHours % 2 !== 0 ) {
+			return 'Integer must be an even number.';
 		}
 
 		return null;
@@ -797,6 +817,31 @@ const ValidationComponent = ( {
 				custom: maybeCustomRule( customToggleGroupRule ),
 			},
 		},
+		{
+			id: 'arrayWithChildren',
+			type: 'array',
+			label: 'Array with children',
+			children: [
+				{
+					id: 'day',
+					label: 'Day',
+					type: 'text',
+					isValid: {
+						required,
+						custom: custom ? customNestedTextRule : undefined,
+					},
+				},
+				{
+					id: 'openingHours',
+					label: 'Opening Hours',
+					type: 'integer',
+					isValid: {
+						required,
+						custom: custom ? customNestedIntegerRule : undefined,
+					},
+				},
+			],
+		},
 	];
 
 	const form = {
@@ -814,6 +859,7 @@ const ValidationComponent = ( {
 			'boolean',
 			'toggle',
 			'toggleGroup',
+			'arrayWithChildren',
 			'password',
 			'customEdit',
 		],
