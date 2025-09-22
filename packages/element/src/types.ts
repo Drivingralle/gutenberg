@@ -3,9 +3,23 @@
  *
  * We don't want to import from there directly to avoid a circular dependency.
  */
-export type TranslatableText< T extends string > = string & {
+type TranslatableText< T extends string > = string & {
 	readonly __translatableText: T;
 };
+
+/**
+ * The input that can be passed to `createInterpolateElement`.
+ */
+export type InterpolationInput = string | TranslatableText< string >;
+
+/**
+ * The literal string extract from the input.
+ */
+export type InterpolationString< Input > = Input extends TranslatableText<
+	infer Text
+>
+	? Text
+	: Input;
 
 /**
  * Helper type to extract tag name and handle closing/self-closing indicators
