@@ -543,7 +543,7 @@ const ValidationComponent = ( {
 		integer: 2,
 		boolean: true,
 		customEdit: 'custom control',
-		password: 'secretpassword123',
+		password: 'secretPassword123',
 		toggle: undefined,
 		toggleGroup: undefined,
 		arrayWithChildren: [
@@ -651,6 +651,19 @@ const ValidationComponent = ( {
 			return 'Integer must be an even number.';
 		}
 
+		return null;
+	};
+	const customNestedParentRule = ( value: ValidatedItem ) => {
+		if (
+			value.arrayWithChildren.some(
+				( item, index ) =>
+					value.arrayWithChildren.findIndex(
+						( otherItem ) => otherItem.day === item.day
+					) !== index
+			)
+		) {
+			return 'There cannot be repeated day values.';
+		}
 		return null;
 	};
 
@@ -841,27 +854,31 @@ const ValidationComponent = ( {
 					},
 				},
 			],
+			isValid: {
+				required,
+				custom: custom ? customNestedParentRule : undefined,
+			},
 		},
 	];
 
 	const form = {
 		layout: { type },
 		fields: [
-			'text',
-			'select',
-			'textWithRadio',
-			'textarea',
-			'email',
-			'telephone',
-			'url',
-			'color',
-			'integer',
-			'boolean',
-			'toggle',
-			'toggleGroup',
+			// 'text',
+			// 'select',
+			// 'textWithRadio',
+			// 'textarea',
+			// 'email',
+			// 'telephone',
+			// 'url',
+			// 'color',
+			// 'integer',
+			// 'boolean',
+			// 'toggle',
+			// 'toggleGroup',
 			'arrayWithChildren',
-			'password',
-			'customEdit',
+			// 'password',
+			// 'customEdit',
 		],
 	};
 
