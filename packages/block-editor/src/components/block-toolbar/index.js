@@ -130,6 +130,7 @@ export function PrivateBlockToolbar( {
 
 		// The switch style button appears more prominently with the
 		// content only pattern experiment.
+		// @ZOOMOUTMODE
 		const _showSwitchSectionStyleButton =
 			window?.__experimentalContentOnlyPatternInsertion
 				? _isZoomOut || isSectionBlock( selectedBlockClientId )
@@ -146,7 +147,6 @@ export function PrivateBlockToolbar( {
 			shouldShowVisualToolbar: isValid && isVisual,
 			toolbarKey: `${ selectedBlockClientId }${ parentClientId }`,
 			showParentSelector:
-				! _isZoomOut &&
 				parentBlockType &&
 				editingMode !== 'contentOnly' &&
 				getBlockEditingMode( parentClientId ) !== 'disabled' &&
@@ -159,10 +159,11 @@ export function PrivateBlockToolbar( {
 			isUsingBindings: _isUsingBindings,
 			hasParentPattern: _hasParentPattern,
 			hasContentOnlyLocking: _hasTemplateLock,
+			// @ZOOMOUTMODE
 			showShuffleButton: _isZoomOut,
-			showSlots: ! _isZoomOut,
-			showGroupButtons: ! _isZoomOut,
-			showLockButtons: ! _isZoomOut,
+			showSlots: true,
+			showGroupButtons: true,
+			showLockButtons: true,
 			showSwitchSectionStyleButton: _showSwitchSectionStyleButton,
 			hasFixedToolbar: getSettings().hasFixedToolbar,
 			isNavigationMode: isNavigationModeEnabled,

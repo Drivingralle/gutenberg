@@ -89,7 +89,6 @@ export function BlockSettingsDropdown( {
 		openedBlockSettingsMenu,
 		isContentOnly,
 		isNavigationMode,
-		isZoomOut,
 	} = useSelect(
 		( select ) => {
 			const {
@@ -101,7 +100,6 @@ export function BlockSettingsDropdown( {
 				getOpenedBlockSettingsMenu,
 				getBlockEditingMode,
 				isNavigationMode: _isNavigationMode,
-				isZoomOut: _isZoomOut,
 			} = unlock( select( blockEditorStore ) );
 
 			const { getActiveBlockVariation } = select( blocksStore );
@@ -127,7 +125,6 @@ export function BlockSettingsDropdown( {
 				isContentOnly:
 					getBlockEditingMode( firstBlockClientId ) === 'contentOnly',
 				isNavigationMode: _isNavigationMode(),
-				isZoomOut: _isZoomOut(),
 			};
 		},
 		[ firstBlockClientId ]
@@ -312,7 +309,7 @@ export function BlockSettingsDropdown( {
 											{ __( 'Duplicate' ) }
 										</MenuItem>
 									) }
-									{ canInsertBlock && ! isZoomOut && (
+									{ canInsertBlock && (
 										<>
 											<MenuItem
 												onClick={ pipe(
