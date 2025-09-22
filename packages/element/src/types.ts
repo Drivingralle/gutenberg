@@ -13,7 +13,7 @@ type TranslatableText< T extends string > = string & {
 export type InterpolationInput = string | TranslatableText< string >;
 
 /**
- * The literal string extract from the input.
+ * The literal string extracted from the input.
  */
 export type InterpolationString< Input > = Input extends TranslatableText<
 	infer Text
